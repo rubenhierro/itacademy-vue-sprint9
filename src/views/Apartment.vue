@@ -19,3 +19,6 @@ const { enabledServices, disabledServices } = storeToRefs(store)
     </ul>
   </div>
 </template>
+
+<style>
+</style>
