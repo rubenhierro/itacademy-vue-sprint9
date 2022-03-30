@@ -1,5 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
 import apartment from "../views/Apartment.vue";
+import booking from "../views/Booking.vue";
+import calendar from "../views/CalendarView.vue";
+import bookings from "../views/admin/Bookings.vue";
+import login from "../views/admin/Login.vue";
+import prices from "../views/admin/prices.vue";
+import register from "../views/admin/Register.vue";
+import services from "../views/admin/Services.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,37 +19,37 @@ const router = createRouter({
     {
       path: "/reservas",
       name: "booking",
-      component: () => import("../views/booking.vue"),
+      component: booking,
     },
     {
       path: "/admin/",
       name: "login",
-      component: () => import("../views/admin/login.vue"),
+      component: login,
     },
     {
       path: "/admin/registro",
       name: "register",
-      component: () => import("../views/admin/register.vue"),
+      component: register,
     },
     {
       path: "/admin/servicios",
       name: "services",
-      component: () => import("../views/admin/services.vue"),
+      component: services,
     },
     {
       path: "/admin/precios",
       name: "prices",
-      component: () => import("../views/admin/prices.vue"),
+      component: prices,
     },
     {
       path: "/admin/reservas",
       name: "bookings",
-      component: () => import("../views/admin/bookings.vue"),
+      component: bookings,
     },
     {
       path: "/calendar",
       name: "calendar",
-      component: () => import("../views/calendarview.vue"),
+      component: calendar,
     },
   ],
 });
