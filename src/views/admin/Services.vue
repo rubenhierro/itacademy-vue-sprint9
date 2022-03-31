@@ -3,27 +3,34 @@ import { ref } from 'vue'
 import { useApartmentStore } from '../../stores/ApartmentStore';
 import { storeToRefs } from 'pinia';
 import service from '@/classes/Service'
+import list from '../../components/List.vue'
 
 const store = useApartmentStore()
 const { enabledServices, disabledServices, services } = storeToRefs(store)
 const name = ref(null)
 const isActive = ref(true)
 const isEditing = ref(false)
+const currentService = ref(null)
 
 function addService() {
   const newService = new service()
   newService.name = name.value
   newService.isActive = isActive.value
-  console.log(newService);
-  store.addService(newService)
+  !isEditing.value
+    ? store.addService(newService)
+    : store.editService(currentService.value, newService)
   name.value = ''
   isEditing.value = false
 }
 
 function editService(id) {
-  console.log(id);
   isEditing.value = true
   name.value = services.value[id].name
+  currentService.value = id
+
+}
+function deleteService(id) {
+  store.deleteService(id)
 }
 
 </script>
@@ -40,12 +47,8 @@ function editService(id) {
           <button type="submit">Add</button>
         </form>
       </div>
-
       <div>
-        <h3>Servicios</h3>
-        <ul>
-          <li v-for="(service, key) of services" :key="key" @click="editService(key)">{{ service.name }}</li>
-        </ul>
+        <list :name="'Servicios'" :list="services" @edit="editService" @delete="deleteService" />
       </div>
     </div>
   </div>
