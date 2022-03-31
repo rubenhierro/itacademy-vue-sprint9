@@ -48,7 +48,13 @@ function deleteService(id) {
         </form>
       </div>
       <div>
-        <list :name="'Servicios'" :list="services" @edit="editService" @delete="deleteService" />
+        <list
+          :name="'Servicios'"
+          :list="services"
+          :properties="['name', 'isActive']"
+          @edit="editService"
+          @delete="deleteService"
+        />
       </div>
     </div>
   </div>

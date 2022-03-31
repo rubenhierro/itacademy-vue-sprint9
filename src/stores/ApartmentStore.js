@@ -7,6 +7,10 @@ export const useApartmentStore = defineStore({
       { name: "tv color", isActive: true },
       { name: "aire acondicionado", isActive: false },
     ],
+    prices: [
+      { start: new Date().toLocaleDateString(), end: "end", amount: 500 },
+      { start: "start", end: "end", amount: 300 },
+    ],
   }),
   getters: {
     enabledServices: (state) => state.services.filter((i) => i.isActive),
