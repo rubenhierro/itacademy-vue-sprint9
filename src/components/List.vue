@@ -6,7 +6,7 @@
         <li class="list-group-item flex-row-reverse" v-for="(item, key) of list" :key="key">
           <div>
             <span v-for="property of properties">
-              {{ (property).toUpperCase() }}: {{ item[property] }}
+             <strong>{{ (property.display) }}:</strong> {{ item[property.value] }}
               <br />
             </span>
           </div>

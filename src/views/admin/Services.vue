@@ -36,9 +36,9 @@ function deleteService(id) {
 </script>
 <template>
   <div class="container">
+    <h1>Admin Services</h1>
     <div class="admin-list">
       <div>
-        <h1>Admin Services</h1>
         <span v-if="isEditing" class="text-danger">Editar servicio</span>
         <form @submit.prevent="addService">
           <input type="text" id="serviceInput" v-model="name" placeholder="Servicio" />
@@ -51,7 +51,10 @@ function deleteService(id) {
         <list
           :name="'Servicios'"
           :list="services"
-          :properties="['name', 'isActive']"
+          :properties="[
+            { display: 'Servicio', value: 'name' },
+            { display: 'Incluido', value: 'isActive' }
+          ]"
           @edit="editService"
           @delete="deleteService"
         />
