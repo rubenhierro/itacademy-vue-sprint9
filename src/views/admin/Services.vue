@@ -36,7 +36,7 @@ function deleteService(id) {
 </script>
 <template>
   <div class="container">
-    <h1>Admin Services</h1>
+    <h1>Admin Servicios</h1>
     <div class="admin-list">
       <div>
         <span v-if="isEditing" class="text-danger">Editar servicio</span>

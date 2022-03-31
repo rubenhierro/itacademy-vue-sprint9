@@ -68,7 +68,7 @@ export default {
 
 <template>
   <div>
-    <h1>Admin Prices</h1>
+    <h1>Admin Precios</h1>
   </div>
   <div class="d-flex justify-content-between">
     <form id="prices-form" @submit.prevent="addPrice">

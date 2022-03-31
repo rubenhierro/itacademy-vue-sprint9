@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import apartment from "../views/Apartment.vue";
 import booking from "../views/Booking.vue";
-import calendar from "../views/CalendarView.vue";
 import bookings from "../views/admin/Bookings.vue";
 import login from "../views/admin/Login.vue";
 import prices from "../views/admin/prices.vue";
@@ -51,11 +50,6 @@ const router = createRouter({
       path: "/admin/reservas",
       name: "bookings",
       component: bookings,
-    },
-    {
-      path: "/calendar",
-      name: "calendar",
-      component: calendar,
     },
   ],
 });

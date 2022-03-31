@@ -58,7 +58,7 @@ export default {
 
 <template>
   <div>
-    <h1>Admin Bookings</h1>
+    <h1>Admin Disponibilidad</h1>
   </div>
   <div class="d-flex justify-content-between">
     <form @submit.prevent="addDisabledDate">
