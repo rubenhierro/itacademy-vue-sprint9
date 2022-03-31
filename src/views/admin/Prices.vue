@@ -132,6 +132,7 @@ export default {
           { display: 'Hasta', value: 'end' },
           { display: 'Precio', value: 'amount' }
         ]"
+        :buttons="{ edit: true, delete: true }"
         @edit="editPrice"
         @delete="deletePrice"
       />

@@ -7,6 +7,7 @@ import login from "../views/admin/Login.vue";
 import prices from "../views/admin/prices.vue";
 import register from "../views/admin/Register.vue";
 import services from "../views/admin/Services.vue";
+import availability from "../views/admin/Availability.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -40,6 +41,11 @@ const router = createRouter({
       path: "/admin/precios",
       name: "prices",
       component: prices,
+    },
+    {
+      path: "/admin/disponibilidad",
+      name: "availability",
+      component: availability,
     },
     {
       path: "/admin/reservas",

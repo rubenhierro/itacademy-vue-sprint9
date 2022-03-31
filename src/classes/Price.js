@@ -1,4 +1,4 @@
-export default class Service {
+export default class Price {
   start;
   end;
   amount;

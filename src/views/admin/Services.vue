@@ -55,6 +55,7 @@ function deleteService(id) {
             { display: 'Servicio', value: 'name' },
             { display: 'Incluido', value: 'isActive' }
           ]"
+          :buttons="{ edit: true, delete: true }"
           @edit="editService"
           @delete="deleteService"
         />

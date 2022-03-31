@@ -5,14 +5,15 @@ export const useBookingStore = defineStore({
   state: () => ({
     prices: [
       { start: new Date().toLocaleDateString(), end: "end", amount: 500 },
-      { start: "start", end: "end", amount: 300 },
+    ],
+    disabledDates: JSON.parse(localStorage.getItem("disabledDates")) || [
+      { start: null, end: new Date() },
     ],
   }),
-  // getters: {
-  //   enabledServices: (state) => state.services.filter((i) => i.isActive),
-  //   disabledServices: (state) => state.services.filter((i) => !i.isActive),
-  //   getService: (state) => (id) => state.services.find((i, key) => key === id),
-  // },
+  getters: {
+    getDisponibility: (state) =>
+      state.disabledDates.filter((i) => i.end > new Date()),
+  },
   actions: {
     addPrice(price) {
       this.prices = [...this.prices, price];
@@ -23,6 +24,14 @@ export const useBookingStore = defineStore({
     },
     deletePrice(id) {
       this.prices = this.prices.filter((i, key) => key !== id);
+    },
+    addDisabledDate(date) {
+      this.disabledDates = [...this.disabledDates, date];
+      console.log(this.disabledDates);
+      localStorage.setItem("disabledDates", JSON.stringify(this.disabledDates));
+    },
+    deleteDisabledDate(id) {
+      this.disabledDates = this.prices.filter((i, key) => key !== id);
     },
   },
 });
