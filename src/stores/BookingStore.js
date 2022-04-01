@@ -6,9 +6,8 @@ export const useBookingStore = defineStore({
     prices: [
       { start: new Date().toLocaleDateString(), end: "end", amount: 500 },
     ],
-    disabledDates: JSON.parse(localStorage.getItem("disabledDates")) || [
-      { start: null, end: new Date() },
-    ],
+    disabledDates: JSON.parse(localStorage.getItem("disabledDates")) || [],
+    bookings: JSON.parse(localStorage.getItem("bookings")) || [],
   }),
   getters: {
     getDisponibility: (state) =>
@@ -32,6 +31,14 @@ export const useBookingStore = defineStore({
     },
     deleteDisabledDate(id) {
       this.disabledDates = this.prices.filter((i, key) => key !== id);
+    },
+    addBooking(booking) {
+      this.bookings = [...this.bookings, booking];
+      JSON.stringify(localStorage.setItem("bookings", this.bookings))
+      console.log(this.bookings);
+    },
+    deleteBooking(id) {
+      this.bookings = this.bookings.filter((i, key) => key !== id);
     },
   },
 });

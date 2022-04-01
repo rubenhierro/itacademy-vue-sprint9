@@ -11,7 +11,7 @@ export default class Booking {
   isAproved;
 
   constructor(start, end, name, email, adults, childs, comment) {
-    this.id = Budged.incrementId();
+    this.id = Booking.incrementId();
     this.date = new Date();
     this.start = start;
     this.end = end;

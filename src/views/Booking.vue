@@ -1,14 +1,9 @@
 <script>
 import { useBookingStore } from '../stores/BookingStore'
 import ReservationForm from '../components/ReservationForm.vue'
-// import { storeToRefs } from 'pinia';
-
-
-// const store = useBookingStore()
-// const { prices } = storeToRefs(store)
 
 export default {
-  components: ["ReservationForm"],
+  components: { ReservationForm },
   data() {
     return {
       store: useBookingStore()
@@ -19,7 +14,6 @@ export default {
       return this.store.prices;
     }
   },
-  components: { ReservationForm }
 }
 </script>
 <template>
