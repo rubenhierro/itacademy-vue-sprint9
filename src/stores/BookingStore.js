@@ -12,6 +12,7 @@ export const useBookingStore = defineStore({
   getters: {
     getDisponibility: (state) =>
       state.disabledDates.filter((i) => i.end > new Date()),
+    getPendingBookings: (state) => state.bookings.filter(i => i.isAproved === null),
   },
   actions: {
     addPrice(price) {
@@ -34,11 +35,12 @@ export const useBookingStore = defineStore({
     },
     addBooking(booking) {
       this.bookings = [...this.bookings, booking];
-      JSON.stringify(localStorage.setItem("bookings", this.bookings))
+      localStorage.setItem("bookings", JSON.stringify(this.bookings));
       console.log(this.bookings);
     },
     deleteBooking(id) {
       this.bookings = this.bookings.filter((i, key) => key !== id);
+      localStorage.setItem("bookings", JSON.stringify(this.bookings));
     },
   },
 });

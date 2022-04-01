@@ -41,17 +41,23 @@ export default {
   },
   methods: {
     addBooking() {
-      const booking = new Booking(
-        this.range.start,
-        this.range.end,
-        this.name,
-        this.email,
-        this.adults,
-        this.childs,
-        this.comment
-      );
-      this.store.addBooking(booking)
-      this.alert('Nice, you triggered this alert message!', 'success')
+      if (this.range.start && this.range.end) {
+        const booking = new Booking(
+          this.range.start,
+          this.range.end,
+          this.name,
+          this.email,
+          this.adults,
+          this.childs,
+          this.comment
+        );
+        this.store.addBooking(booking)
+        this.alert('¡Mensaje enviado. Te contesto en un periquete!', 'success')
+        document.getElementById('booking-form').reset()
+      } else {
+        this.alert('¡Cuidado, revisa el formulario y rellena todos los datos!', 'danger')
+      }
+
     },
     alert(message, type) {
       const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
@@ -99,7 +105,7 @@ export default {
   </div>
 
   <!-- Reservation form -->
-  <form class="row g-3 needs-validation" @submit.prevent="addBooking">
+  <form class="row g-3 needs-validation" id="booking-form" @submit.prevent="addBooking">
     <div class="col-md-6 pt-3">
       <label for="name" class="form-label">Nombre</label>
       <input
