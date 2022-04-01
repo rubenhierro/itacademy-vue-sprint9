@@ -7,6 +7,7 @@ import prices from "../views/admin/prices.vue";
 import register from "../views/admin/Register.vue";
 import services from "../views/admin/Services.vue";
 import availability from "../views/admin/Availability.vue";
+import form from "../components/ReservationForm.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -50,6 +51,11 @@ const router = createRouter({
       path: "/admin/reservas",
       name: "bookings",
       component: bookings,
+    },
+    {
+      path: "/admin/form",
+      name: "form",
+      component: form,
     },
   ],
 });

@@ -1,16 +1,31 @@
-<script setup>
-import { ref } from 'vue'
+<script>
 import { useBookingStore } from '../stores/BookingStore'
-import { storeToRefs } from 'pinia';
-import price from '../classes/Price'
+import ReservationForm from '../components/ReservationForm.vue'
+// import { storeToRefs } from 'pinia';
 
-const store = useBookingStore()
-const { prices } = storeToRefs(store)
+
+// const store = useBookingStore()
+// const { prices } = storeToRefs(store)
+
+export default {
+  components: ["ReservationForm"],
+  data() {
+    return {
+      store: useBookingStore()
+    };
+  },
+  computed: {
+    prices() {
+      return this.store.prices;
+    }
+  },
+  components: { ReservationForm }
+}
 </script>
 <template>
-  <div>
-    <h1>Reservas</h1>
-    <h3>Precios</h3>
+  <h1>Reservas</h1>
+  <h3>Precios</h3>
+  <div class="row bord p-5 shadow m-5">
     <table class="table">
       <thead>
         <tr>
@@ -27,5 +42,11 @@ const { prices } = storeToRefs(store)
         </tr>
       </tbody>
     </table>
+  </div>
+  <div>
+    <h3>Formulario de reservas</h3>
+    <div class="row bord p-5 shadow m-5">
+      <ReservationForm />
+    </div>
   </div>
 </template>

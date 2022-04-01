@@ -12,7 +12,8 @@ import { RouterLink, RouterView } from 'vue-router'
         <RouterLink to="/admin/servicios">Servicios</RouterLink>-
         <RouterLink to="/admin/precios">Precios</RouterLink>-
         <RouterLink to="/admin/disponibilidad">Disponibilidad</RouterLink>-
-        <RouterLink to="/admin/reservas">Reservas</RouterLink>
+        <RouterLink to="/admin/reservas">Reservas</RouterLink>-
+        <RouterLink to="/admin/form">Form</RouterLink>-
       </nav>
     </header>
     <RouterView />
