@@ -1,6 +1,6 @@
 <script setup>
 const props = defineProps(['name', 'list', 'properties', 'buttons'])
-const emits = defineEmits(['edit', 'delete', 'confirm'])
+const emits = defineEmits(['edit', 'delete', 'confirm', 'refuse'])
 </script>
 <template>
   <div v-if="list.length">
@@ -22,7 +22,7 @@ const emits = defineEmits(['edit', 'delete', 'confirm'])
                 ? "Pendiente"
                 : item.isAproved === true
                   ? "Aprobada"
-                  : "Refusada"
+                  : "Rechazada"
             }}
           </span>
           <div>
@@ -44,6 +44,12 @@ const emits = defineEmits(['edit', 'delete', 'confirm'])
               class="btn btn-success"
               @click="$emit('confirm', key, item.id)"
             >Confirmar</a>
+            <a
+              v-if="buttons.confirm && item.isAproved === null"
+              href="#"
+              class="btn btn-warning"
+              @click="$emit('refuse', key, item.id)"
+            >Rechazar</a>
             <a
               v-if="buttons.edit"
               href="#"
@@ -77,6 +83,6 @@ const emits = defineEmits(['edit', 'delete', 'confirm'])
   background-color: lightpink;
 }
 .refused {
-  background-color: red;
+  background-color: orange;
 }
 </style>

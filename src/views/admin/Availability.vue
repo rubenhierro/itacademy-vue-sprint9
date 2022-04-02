@@ -30,8 +30,7 @@ export default {
     disabledDates() {
       const disablePast = { start: null, end: new Date() }
       const disponibility = this.store.getDisponibility
-      const booked = this.store.getPendingBookings
-      return [disablePast, ...disponibility, ...booked]
+      return [disablePast, ...disponibility, ...this.bookedDates]
     },
     selectDragAttribute() {
       return {
@@ -74,9 +73,6 @@ export default {
     deleteDisabledDate(id) {
       this.store.deleteDisabledDate(id)
     }
-  },
-  mounted() {
-    console.log(this.pendingDates);
   },
 };
 </script>

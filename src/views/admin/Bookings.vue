@@ -8,17 +8,11 @@ import DisabledDate from '../../classes/DisabledDate'
 const store = useBookingStore()
 const { bookings, getPendingBookings } = storeToRefs(store)
 
-function confirmBooking(id) {
-  const booking = bookings.value[id]
-  const disabledDate = new DisabledDate(
-    booking.start,
-    booking.end
-  )
-  store.addDisabledDate(disabledDate)
-  store.confirmBooking(booking)
+function confirmBooking(key, id) {
+  store.changeBookingState(id, true)
 }
-function refuseBooking(id) {
-
+function refuseBooking(key, id) {
+  store.changeBookingState(id, false)
 }
 function deleteBooking(key, id) {
   store.deleteBooking(id)

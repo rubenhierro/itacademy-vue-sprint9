@@ -44,13 +44,6 @@ export const useBookingStore = defineStore({
       this.disabledDates = this.disabledDates.filter((i, key) => key !== id);
       localStorage.setItem("disabledDates", JSON.stringify(this.disabledDates));
     },
-    // deleteBookingDate(date) {
-    //   const sel = this.disabledDates.filter((i) => i.start === date.start);
-    //   const id = this.disabledDates.indexOf(sel);
-    //   console.log(id);
-    //   this.disabledDates = this.disabledDates.filter((i, key) => key !== id);
-    //   localStorage.setItem("disabledDates", JSON.stringify(this.disabledDates));
-    // },
     addBooking(booking) {
       this.bookings = [...this.bookings, booking];
       localStorage.setItem("bookings", JSON.stringify(this.bookings));
@@ -59,17 +52,10 @@ export const useBookingStore = defineStore({
       this.bookings = this.bookings.filter((i) => i.id !== id);
       localStorage.setItem("bookings", JSON.stringify(this.bookings));
     },
-    // addPrebBoking(booking) {
-    //   this.preBookings = [...this.preBookings, booking];
-    //   localStorage.setItem("preBookings", JSON.stringify(this.preBookings));
-    // },
-    // deletePreBooking(id) {
-    //   this.preBookings = this.preBookings.filter((i, key) => key !== id);
-    //   localStorage.setItem("preBookings", JSON.stringify(this.preBookings));
-    // },
-    confirmBooking(booking) {
-      const index = this.bookings.indexOf(booking);
-      booking.isAproved = true;
+    changeBookingState(id, state) {
+      const booking = this.bookings.find(i => i.id === id)
+      const index = this.bookings.indexOf(booking);    
+      booking.isAproved = state;
       this.bookings.splice(index, 1, booking);
       localStorage.setItem("bookings", JSON.stringify(this.bookings));
     },

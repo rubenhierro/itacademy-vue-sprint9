@@ -41,10 +41,14 @@ export default {
   },
   methods: {
     addBooking() {
+      //---- to subtract a day to get it disponible in calendar
+      const checkOut = this.range.end
+      checkOut.setDate(checkOut.getDate() - 1)
+      
       if (this.range.start && this.range.end) {
         const booking = new Booking(
           this.range.start,
-          this.range.end,
+          checkOut,
           this.name,
           this.email,
           this.adults,
