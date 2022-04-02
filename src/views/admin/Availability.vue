@@ -18,7 +18,6 @@ export default {
         start: null,
         end: null,
       },
-      currentDate: null
     };
   },
   computed: {
@@ -26,9 +25,10 @@ export default {
       return this.store.disabledDates
     },
     disabledDates() {
-      const disablePast = { start: null, end: new Date() }
-      const disponibility = this.store.getDisponibility
-      return [disablePast, ...disponibility]
+      return this.store.getDisponibility
+      // const disablePast = { start: null, end: new Date() }
+      // const disponibility = this.store.getDisponibility
+      // return [disablePast, ...disponibility]
     },
     selectDragAttribute() {
       return {
@@ -37,7 +37,19 @@ export default {
           isInteractive: false, // Defaults to true when using slot
         },
       };
-    },
+    },      
+    attributes(){
+     return [
+        {
+          key: 'today',
+          highlight: {
+            color: 'orange',
+            fillMode: 'light',
+          },
+          dates: this.disabledDates
+        }
+      ]
+    } 
   },
   methods: {
     addDisabledDate() {
@@ -63,12 +75,13 @@ export default {
     <form @submit.prevent="addDisabledDate">
       <DatePicker
         v-model="range"
-        :columns="2"
+        :columns="$screens({ default: 1, laptop: 2 })"
         :select-attribute="selectDragAttribute"
         :drag-attribute="selectDragAttribute"
         is-range
         @drag="dragValue = $event"
         :disabled-dates="disabledDates"
+        :attributes="attributes"
       >
         <template v-slot:day-popover="{ format }">
           <div>
@@ -81,6 +94,7 @@ export default {
       <br />
       <button>add</button>
     </form>
+    <br />
 
     <div>
       <List
@@ -105,5 +119,7 @@ export default {
   margin: 0 auto;
   padding: 2rem;
   font-weight: normal;
+}
+@media screen and(max-width: 600px) {
 }
 </style>

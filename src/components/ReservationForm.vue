@@ -77,7 +77,7 @@ export default {
   <!-- Calendar -->
   <DatePicker
     v-model="range"
-    :columns="2"
+    :columns="$screens({ default: 1, laptop: 2 })"
     :select-attribute="selectDragAttribute"
     :drag-attribute="selectDragAttribute"
     is-range

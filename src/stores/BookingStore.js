@@ -3,17 +3,20 @@ import { defineStore } from "pinia";
 export const useBookingStore = defineStore({
   id: "booking",
   state: () => ({
-    prices: [
-      { start: new Date().toLocaleDateString(), end: "end", amount: 500 },
-    ],
+    prices: JSON.parse(localStorage.getItem("prices")) || [],
     disabledDates: JSON.parse(localStorage.getItem("disabledDates")) || [],
     bookings: JSON.parse(localStorage.getItem("bookings")) || [],
   }),
   getters: {
     getDisponibility: (state) =>
-      state.disabledDates.filter((i) => i.end > new Date()),
-    getPendingBookings: (state) =>
-      state.bookings.filter((i) => i.isAproved === null),
+      state.parseDisabledDates.filter((i) => i.end > new Date()),
+      parseDisabledDates: (state) =>
+      state.disabledDates.map(({ start, end }) => ({
+        start: new Date([start]),
+        end: new Date([end]),
+      })),
+      getPendingBookings: (state) =>
+        state.bookings.filter((i) => i.isAproved === null),
   },
   actions: {
     addPrice(price) {
@@ -33,7 +36,7 @@ export const useBookingStore = defineStore({
       localStorage.setItem("disabledDates", JSON.stringify(this.disabledDates));
     },
     deleteDisabledDate(id) {
-      this.disabledDates = this.prices.filter((i, key) => key !== id);
+      this.disabledDates = this.disabledDates.filter((i, key) => key !== id);
       localStorage.setItem("disabledDates", JSON.stringify(this.disabledDates));
     },
     addBooking(booking) {
