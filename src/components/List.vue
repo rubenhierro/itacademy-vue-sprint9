@@ -17,6 +17,14 @@
           </div>
 
           <div class="text-end">
+            <a
+              v-if="buttons.confirm"
+              href="#"
+              class="btn btn-success"
+              @click="$emit('confirm', key)"
+            >
+              Aprobar
+            </a>
             <a v-if="buttons.edit" href="#" class="btn btn-primary" @click="$emit('edit', key)">
               <i class="fa-regular fa-pen-to-square"></i>
             </a>

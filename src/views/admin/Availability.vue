@@ -42,7 +42,6 @@ export default {
   methods: {
     addDisabledDate() {
       if (this.range.start && this.range.end) {
-        console.log(true);
         const disabledDate = new DisabledDate(this.range.start, this.range.end)
         this.store.addDisabledDate(disabledDate)
         this.range.start = null
