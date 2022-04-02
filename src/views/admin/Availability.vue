@@ -21,14 +21,17 @@ export default {
     };
   },
   computed: {
-    disabled() {
-      return this.store.disabledDates
+    pendingDates() {
+      return this.store.getPendingBookings
+    },
+    bookedDates() {
+      return this.store.getAprovedBookings
     },
     disabledDates() {
-      return this.store.getDisponibility
-      // const disablePast = { start: null, end: new Date() }
-      // const disponibility = this.store.getDisponibility
-      // return [disablePast, ...disponibility]
+      const disablePast = { start: null, end: new Date() }
+      const disponibility = this.store.getDisponibility
+      const booked = this.store.getPendingBookings
+      return [disablePast, ...disponibility, ...booked]
     },
     selectDragAttribute() {
       return {
@@ -37,19 +40,27 @@ export default {
           isInteractive: false, // Defaults to true when using slot
         },
       };
-    },      
-    attributes(){
-     return [
+    },
+    attributes() {
+      return [
         {
-          key: 'today',
+          key: 'pending',
           highlight: {
-            color: 'orange',
+            color: 'red',
             fillMode: 'light',
           },
-          dates: this.disabledDates
+          dates: this.pendingDates
+        },
+        {
+          key: 'booked',
+          highlight: {
+            color: 'green',
+            fillMode: 'light',
+          },
+          dates: this.bookedDates
         }
       ]
-    } 
+    }
   },
   methods: {
     addDisabledDate() {
@@ -63,7 +74,10 @@ export default {
     deleteDisabledDate(id) {
       this.store.deleteDisabledDate(id)
     }
-  }
+  },
+  mounted() {
+    console.log(this.pendingDates);
+  },
 };
 </script>
 
@@ -98,7 +112,7 @@ export default {
 
     <div>
       <List
-        :name="'Fechas reservadas'"
+        :name="'Reservas manuales'"
         :list="this.store.disabledDates"
         :properties="[
           { display: 'Desde', value: 'start', type: 'date' },

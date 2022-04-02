@@ -9,8 +9,7 @@ const store = useBookingStore()
 const { bookings, getPendingBookings } = storeToRefs(store)
 
 function confirmBooking(id) {
-  // store.deleteBooking(id)
-  const booking = getPendingBookings.value[id]
+  const booking = bookings.value[id]
   const disabledDate = new DisabledDate(
     booking.start,
     booking.end
@@ -18,7 +17,10 @@ function confirmBooking(id) {
   store.addDisabledDate(disabledDate)
   store.confirmBooking(booking)
 }
-function deleteBooking(id) {
+function refuseBooking(id) {
+
+}
+function deleteBooking(key, id) {
   store.deleteBooking(id)
 }
 </script>
@@ -28,30 +30,18 @@ function deleteBooking(id) {
   </div>
   <div>
     <List
-      :name="'Pendientes'"
-      :list="getPendingBookings"
-      :properties="[
-        { display: 'Desde', value: 'start', type: 'date' },
-        { display: 'Hasta', value: 'end', type: 'date' },
-        { display: 'Nombre', value: 'name' },
-        { display: 'Email', value: 'email' }
-      ]"
-      :buttons="{ edit: false, delete: true, confirm: true }"
-      @confirm="confirmBooking"
-      @delete="deleteBooking"
-    />
-  </div>
-  <div>
-    <List
-      :name="'Próximas'"
+      :name="'Reservas'"
       :list="bookings"
       :properties="[
         { display: 'Desde', value: 'start', type: 'date' },
         { display: 'Hasta', value: 'end', type: 'date' },
         { display: 'Nombre', value: 'name' },
-        { display: 'Email', value: 'email' }
+        { display: 'Email', value: 'email' },
+        { display: 'Estado', value: 'isAproved' },
       ]"
-      :buttons="{ edit: false, delete: true }"
+      :buttons="{ edit: false, delete: true, confirm: true, refuse: true }"
+      @confirm="confirmBooking"
+      @refuse="refuseBooking"
       @delete="deleteBooking"
     />
   </div>

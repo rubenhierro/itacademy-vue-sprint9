@@ -1,9 +1,30 @@
+<script setup>
+const props = defineProps(['name', 'list', 'properties', 'buttons'])
+const emits = defineEmits(['edit', 'delete', 'confirm'])
+</script>
 <template>
   <div v-if="list.length">
     <div class="card" style="width: 30rem;">
       <div class="card-header fs-3">{{ name }}</div>
       <ul lass="list-group list-group-flush">
         <li class="list-group-item flex-row-reverse" v-for="(item, key) of list" :key="key">
+          <span
+            v-if="item.hasOwnProperty('isAproved')"
+            :class="{
+              aproved: item.isAproved === true,
+              pending: item.isAproved === null,
+              refused: item.isAproved === false,
+            }"
+          >
+            <strong>Estado:</strong>
+            {{
+              item.isAproved === null
+                ? "Pendiente"
+                : item.isAproved === true
+                  ? "Aprobada"
+                  : "Refusada"
+            }}
+          </span>
           <div>
             <span v-for="property of properties">
               <strong>{{ (property.display) }}:</strong>
@@ -18,18 +39,26 @@
 
           <div class="text-end">
             <a
-              v-if="buttons.confirm"
+              v-if="buttons.confirm && item.isAproved === null"
               href="#"
               class="btn btn-success"
-              @click="$emit('confirm', key)"
+              @click="$emit('confirm', key, item.id)"
+            >Confirmar</a>
+            <a
+              v-if="buttons.edit"
+              href="#"
+              class="btn btn-primary"
+              @click="$emit('edit', key, item.id)"
             >
-              Aprobar
+              <i class="fa-regular fa-pen-to-square"></i> Editar
             </a>
-            <a v-if="buttons.edit" href="#" class="btn btn-primary" @click="$emit('edit', key)">
-              <i class="fa-regular fa-pen-to-square"></i>
-            </a>
-            <a v-if="buttons.delete" href="#" class="btn btn-danger" @click="$emit('delete', key)">
-              <i class="fa-regular fa-trash-can"></i>
+            <a
+              v-if="buttons.delete"
+              href="#"
+              class="btn btn-danger"
+              @click="$emit('delete', key, item.id)"
+            >
+              <i class="fa-regular fa-trash-can"></i> Borrar
             </a>
           </div>
         </li>
@@ -37,7 +66,17 @@
     </div>
   </div>
 </template>
-<script setup>
-const props = defineProps(['name', 'list', 'properties', 'buttons'])
-const emits = defineEmits(['edit', 'delete'])
-</script>
+<style>
+.isNotVisible {
+  display: none;
+}
+.aproved {
+  background-color: lightgreen;
+}
+.pending {
+  background-color: lightpink;
+}
+.refused {
+  background-color: red;
+}
+</style>
