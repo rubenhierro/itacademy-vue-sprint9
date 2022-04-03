@@ -53,7 +53,6 @@ export default {
     },
     editPrice(id) {
       this.isEditing = true
-      // document.getElementById('prices-form').reset()
       this.start = this.store.prices[id].start
       this.end = this.store.prices[id].end
       this.amount = this.store.prices[id].amount

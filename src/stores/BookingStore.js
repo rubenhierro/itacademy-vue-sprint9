@@ -23,7 +23,7 @@ export const useBookingStore = defineStore({
     getRefusedBookings: (state) =>
       state.bookings.filter((i) => i.isAproved === false),
     getBookingById: (state) => {
-      return (id) => state.bookings.find((i) => i.id === id);
+      return (id) => state.bookings.find((i, key) => key === id);
     },
   },
   actions: {
@@ -52,14 +52,13 @@ export const useBookingStore = defineStore({
       localStorage.setItem("bookings", JSON.stringify(this.bookings));
     },
     deleteBooking(id) {
-      this.bookings = this.bookings.filter((i) => i.id !== id);
+      this.bookings = this.bookings.filter((i, key) => key !== id);
       localStorage.setItem("bookings", JSON.stringify(this.bookings));
     },
     changeBookingState(id, state) {
-      const booking = this.bookings.find((i) => i.id === id);
-      const index = this.bookings.indexOf(booking);
+      const booking = this.bookings.find((i, key) => key === id);
       booking.isAproved = state;
-      this.bookings.splice(index, 1, booking);
+      this.bookings.splice(id, 1, booking);
       localStorage.setItem("bookings", JSON.stringify(this.bookings));
     },
   },

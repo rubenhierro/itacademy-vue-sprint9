@@ -36,22 +36,21 @@ function isAvailableRangeDates(booking) {
   }
 }
 
-function confirmBooking(key, id) {
-  const booking = store.getBookingById(id)
+function confirmBooking(key) {
+  const booking = store.getBookingById(key)
   const isInRange = isAvailableRangeDates(booking)
   if (!isInRange) {
-    store.changeBookingState(id, true)
-    console.log('Reserva confirmada');
+    store.changeBookingState(key, true)
     alert('¡Reserva confirmada!', 'success')
   } else {
     alert('¡Cuidado, las fechas de la reserva no están disponibles!', 'danger')
   }
 }
-function refuseBooking(key, id) {
-  store.changeBookingState(id, false)
+function refuseBooking(key) {
+  store.changeBookingState(key, false)
 }
-function deleteBooking(key, id) {
-  store.deleteBooking(id)
+function deleteBooking(key) {
+  store.deleteBooking(key)
 }
 function alert(message, type) {
   const alertPlaceholder = document.getElementById('liveAlertPlaceholder')

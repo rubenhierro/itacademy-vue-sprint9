@@ -3,6 +3,7 @@ import { Calendar, DatePicker } from 'v-calendar';
 import 'v-calendar/dist/style.css';
 import { useBookingStore } from '@/stores/BookingStore';
 import Booking from '@/classes/Booking'
+import { range } from 'lodash';
 
 export default {
   components: {
@@ -17,7 +18,6 @@ export default {
       childs: 0,
       comment: null,
       dragValue: null,
-      counter: 0,
       range: {
         start: null,
         end: null,
@@ -55,7 +55,13 @@ export default {
         );
 
         this.store.addBooking(booking)
-        document.getElementById('booking-form').reset()
+        this.name = null
+        this.email = null
+        this.comment = null
+        this.adults = 1
+        this.childs = 0
+        range.start = null
+        range.end = null
         this.alert('¡Mensaje enviado!', 'success')
       } else {
         this.alert('¡Cuidado, revisa el formulario y rellena todos los datos!', 'danger')
@@ -68,7 +74,7 @@ export default {
       wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
 
       alertPlaceholder.append(wrapper)
-    }
+    },
   },
 };
 </script>
