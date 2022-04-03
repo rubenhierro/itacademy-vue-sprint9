@@ -59,7 +59,7 @@ const emits = defineEmits(['edit', 'delete', 'confirm', 'refuse'])
               <i class="fa-regular fa-pen-to-square"></i> Editar
             </a>
             <a
-              v-if="buttons.delete"
+              v-if="buttons.delete && item.isAproved !== null"
               href="#"
               class="btn btn-danger"
               @click="$emit('delete', key, item.id)"

@@ -5,7 +5,6 @@ import { useBookingStore } from '@/stores/BookingStore';
 import Booking from '@/classes/Booking'
 
 export default {
-  emits: ['add'],
   components: {
     Calendar, DatePicker
   },
@@ -18,6 +17,7 @@ export default {
       childs: 0,
       comment: null,
       dragValue: null,
+      counter: 0,
       range: {
         start: null,
         end: null,
@@ -26,9 +26,7 @@ export default {
   },
   computed: {
     disabledDates() {
-      const disablePast = { start: null, end: new Date() }
-      const disponibility = this.store.getDisponibility
-      return [disablePast, ...disponibility]
+      return this.store.getDisponibility
     },
     selectDragAttribute() {
       return {
@@ -41,10 +39,10 @@ export default {
   },
   methods: {
     addBooking() {
-      //---- to subtract a day to get it disponible in calendar
+      //---- subtract a day to get it disponible in calendar
       const checkOut = this.range.end
       checkOut.setDate(checkOut.getDate() - 1)
-      
+
       if (this.range.start && this.range.end) {
         const booking = new Booking(
           this.range.start,
@@ -55,13 +53,42 @@ export default {
           this.childs,
           this.comment
         );
+        //---- check availability range dates
+        this.isAvailableRangeDates(booking)
+
         this.store.addBooking(booking)
         this.alert('¡Mensaje enviado. Te contesto en un periquete!', 'success')
         document.getElementById('booking-form').reset()
       } else {
         this.alert('¡Cuidado, revisa el formulario y rellena todos los datos!', 'danger')
       }
+    },
+    isAvailableRangeDates(booking) {
+      const start = booking.start;
+      const end = booking.end;
+      const dates = []
 
+      let loop = new Date(start);
+      dates.push(booking.start)
+      do {
+        dates.push(loop)
+        let newDate = loop.setDate(loop.getDate() + 1);
+        loop = new Date(newDate);
+      }
+      while (loop < end)
+
+      for (const range of this.disabledDates) {
+        for (const date of dates) {
+          if ((date >= range.start) && (date <= range.end)) {
+            console.log(true);
+          } else {
+            console.log(false);
+          }
+        }
+      }
+    },
+    isDateInRange(startDate, endDate, date) {
+      return date >= startDate && date <= endDate
     },
     alert(message, type) {
       const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
@@ -87,6 +114,7 @@ export default {
     is-range
     @drag="dragValue = $event"
     :disabled-dates="disabledDates"
+    :min-date="new Date()"
   >
     <template v-slot:day-popover="{ format }">
       <div>

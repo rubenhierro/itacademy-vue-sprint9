@@ -28,9 +28,8 @@ export default {
       return this.store.getAprovedBookings
     },
     disabledDates() {
-      const disablePast = { start: null, end: new Date() }
       const disponibility = this.store.getDisponibility
-      return [disablePast, ...disponibility, ...this.bookedDates]
+      return [...disponibility, ...this.bookedDates]
     },
     selectDragAttribute() {
       return {
@@ -92,6 +91,7 @@ export default {
         @drag="dragValue = $event"
         :disabled-dates="disabledDates"
         :attributes="attributes"
+        :min-date="new Date()"
       >
         <template v-slot:day-popover="{ format }">
           <div>
