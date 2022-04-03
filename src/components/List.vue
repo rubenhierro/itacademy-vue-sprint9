@@ -47,7 +47,7 @@ const emits = defineEmits(['edit', 'delete', 'confirm', 'refuse'])
             <a
               v-if="buttons.confirm && item.isAproved === null"
               href="#"
-              class="btn btn-warning"
+              class="btn btn-danger"
               @click="$emit('refuse', key, item.id)"
             >Rechazar</a>
             <a

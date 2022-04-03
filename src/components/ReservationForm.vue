@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     disabledDates() {
-      return this.store.getDisponibility
+      return [...this.store.getDisponibility, ...this.store.getAprovedBookings]
     },
     selectDragAttribute() {
       return {
@@ -53,42 +53,13 @@ export default {
           this.childs,
           this.comment
         );
-        //---- check availability range dates
-        this.isAvailableRangeDates(booking)
 
         this.store.addBooking(booking)
-        this.alert('¡Mensaje enviado. Te contesto en un periquete!', 'success')
         document.getElementById('booking-form').reset()
+        this.alert('¡Mensaje enviado!', 'success')
       } else {
         this.alert('¡Cuidado, revisa el formulario y rellena todos los datos!', 'danger')
       }
-    },
-    isAvailableRangeDates(booking) {
-      const start = booking.start;
-      const end = booking.end;
-      const dates = []
-
-      let loop = new Date(start);
-      dates.push(booking.start)
-      do {
-        dates.push(loop)
-        let newDate = loop.setDate(loop.getDate() + 1);
-        loop = new Date(newDate);
-      }
-      while (loop < end)
-
-      for (const range of this.disabledDates) {
-        for (const date of dates) {
-          if ((date >= range.start) && (date <= range.end)) {
-            console.log(true);
-          } else {
-            console.log(false);
-          }
-        }
-      }
-    },
-    isDateInRange(startDate, endDate, date) {
-      return date >= startDate && date <= endDate
     },
     alert(message, type) {
       const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
