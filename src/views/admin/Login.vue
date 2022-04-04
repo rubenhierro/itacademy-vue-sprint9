@@ -10,16 +10,20 @@ const hasUser = ref(null)
 const hasPassword = ref(null)
 const username = ref('')
 const password = ref('')
+const isSuperUser = ref(null)
 
 function login() {
   if (username.value && password.value) {
-    const user = new User(null, null, null, username.value, password.value)
+    const user = new User(null, null, null, username.value, password.value, null)
     hasUser.value = store.hasUser(user)
     hasPassword.value = store.hasPassword(user)
+    isSuperUser.value = store.isSuperUser(user)
 
     if (hasUser.value && hasPassword.value) {
-      console.log('entra al push')
       store.setIsLogged(true)
+      if(isSuperUser.value){
+        store.setIsSuperUser(true)
+      }
       router.push({ name: 'apartment' })
     }
   } else {
@@ -58,8 +62,6 @@ function login() {
             <button class="p-2 px-4 btn btn-primary shadow-lg">Login</button>
           </div>
         </form>
-        <span>Already have an account?</span>
-        <router-link :to="{ name: 'register' }">Create an account</router-link>
       </div>
       <div v-else class="v-container">
         <h3>User already logged</h3>

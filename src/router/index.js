@@ -68,23 +68,25 @@ const router = createRouter({
       name: "register",
       component: register,
       meta: {
-        requiresAuth: true,
-        isSuperUser: true
+        requiresSuperAuth: true,
       },
     },
     {
       path: "/login",
       name: "login",
       component: login,
-      meta: {
-        requiresAuth: false,
-      },
     },
   ],
 });
 
 router.beforeEach((to, from) => {
   if (to.meta.requiresAuth && !JSON.parse(localStorage.getItem("isLogged"))) {
+    return { name: "login" };
+  }
+  if (
+    to.meta.requiresSuperAuth &&
+    !JSON.parse(localStorage.getItem("isSuperUser"))
+  ) {
     return { name: "login" };
   }
 });

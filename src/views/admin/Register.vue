@@ -12,6 +12,7 @@ const lastname = ref('')
 const email = ref('')
 const username = ref('')
 const password = ref('')
+const isSuperUser = ref(false)
 const errors = ref([])
 const isValid = {
   firstname: null,
@@ -82,12 +83,15 @@ function validateRegex(re, value) {
 }
 
 function register() {
-  const user = new User(firstname.value, lastname.value, email.value, username.value, password.value)
+  const user = new User(firstname.value, lastname.value, email.value, username.value, password.value, isSuperUser.value)
   hasUser.value = store.hasUser(username.value)
 
   if (!hasUser.value) {
     store.setUser(user)
     store.setIsLogged(true)
+    if (isSuperUser.value) {
+      store.setIsSuperUser(true)
+    }
     router.push({ name: 'apartment' })
   } else {
     document.getElementById('register-form').reset()
@@ -98,7 +102,7 @@ function register() {
   <div class="outer-container">
     <div class="row bord p-5 shadow m-5" id="container">
 
-      <div v-if="!store.isLogged">
+      <div>
         <h1>Register</h1>
         <form class="row g-3" id="register-form" @submit.prevent="checkForm">
           <p v-if="errors.length" class="input-alert">
@@ -136,20 +140,18 @@ function register() {
               placeholder="Contraseña" />
           </div>
 
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" v-model="isSuperUser" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Super Usuario
+            </label>
+          </div>
 
           <div class="col pt-2 text-right">
             <button class="p-2 px-4 btn btn-primary shadow-lg">Crear cuenta</button>
           </div>
         </form>
         <p class="input-alert" v-if="hasUser">Sorry, this user already exists!</p>
-
-        <span>Already have an account?</span>
-        <router-link :to="{ name: 'login' }">Sign in</router-link>
-      </div>
-
-      <div v-else v-container>
-        <h3>User already logged</h3>
-        <a href="#" @click="store.logout">LOGOUT</a>
       </div>
     </div>
   </div>

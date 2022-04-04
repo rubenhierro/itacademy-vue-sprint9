@@ -5,9 +5,10 @@ export const LoginStore = defineStore({
   state: () => ({
     users: JSON.parse(localStorage.getItem("userList")) || [],
     isLogged: JSON.parse(localStorage.getItem("isLogged")) || false,
+    isSuperUser: JSON.parse(localStorage.getItem("isSuperUser")) || false,
   }),
   getters: {
-    getIsLogged: (state) => state.isLogged
+    getIsLogged: (state) => state.isLogged,
   },
   actions: {
     hasUser(user) {
@@ -16,6 +17,10 @@ export const LoginStore = defineStore({
     hasPassword(user) {
       const userFind = this.users.find((i) => i.username === user.username);
       return userFind.password === user.password ? true : false;
+    },
+    isSuperUser(user) {
+      const userFind = this.users.find((i) => i.username === user.username);
+      return userFind.isSuperUser;
     },
     setUser(user) {
       this.users = [...this.users, user];
@@ -26,8 +31,15 @@ export const LoginStore = defineStore({
       this.isLogged = value;
       localStorage.setItem("isLogged", value);
     },
+    setIsSuperUser(value) {
+      this.isSuperUser = value;
+      localStorage.setItem("isSuperUser", value);
+    },
     logout() {
       this.setIsLogged(false);
+      this.setIsSuperUser(false);
+      localStorage.setItem("isLogged", false);
+      localStorage.setItem("isSuperUser", false);
       location.reload();
     },
   },
