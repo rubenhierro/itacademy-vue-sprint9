@@ -1,12 +1,13 @@
 <script setup>
 import { useApartmentStore } from '../stores/ApartmentStore';
 import { storeToRefs } from 'pinia';
-
+import Weather from '../components/Weather.vue'
 const store = useApartmentStore()
 const { enabledServices, disabledServices } = storeToRefs(store)
 </script>
 
 <template>
+<Weather/>
   <div>
     <h1>Apartamento</h1>
     <h3>Servicios</h3>
