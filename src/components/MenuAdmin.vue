@@ -1,5 +1,7 @@
 <script setup>
 import { RouterLink } from 'vue-router'
+import { LoginStore } from '../stores/LoginStore'
+const store = LoginStore()
 </script>
 <template>
   <div class="menu-admin">
@@ -16,6 +18,9 @@ import { RouterLink } from 'vue-router'
         </li>
         <li>
           <RouterLink to="/admin/reservas">Reservas</RouterLink>
+        </li>
+        <li>
+          <a href="#" @click="store.logout">Logout</a>
         </li>
       </ul>
     </nav>

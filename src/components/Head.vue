@@ -1,6 +1,8 @@
 <script setup>
 import Menu from './Menu.vue'
 import MenuAdmin from './MenuAdmin.vue'
+import { LoginStore } from '../stores/LoginStore';
+const store = LoginStore()
 </script>
 <template>
   <div class="head">
@@ -11,7 +13,7 @@ import MenuAdmin from './MenuAdmin.vue'
       <div>
         <Menu />
       </div>
-      <div>
+      <div v-if="store.isLogged">
         <MenuAdmin />
       </div>
     </div>

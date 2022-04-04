@@ -20,7 +20,7 @@ function login() {
     if (hasUser.value && hasPassword.value) {
       console.log('entra al push')
       store.setIsLogged(true)
-      router.push({ name: 'apartament' })
+      router.push({ name: 'apartment' })
     }
   } else {
     if (!username.value) hasUser.value = false

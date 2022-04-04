@@ -68,7 +68,8 @@ const router = createRouter({
       name: "register",
       component: register,
       meta: {
-        requiresAuth: false,
+        requiresAuth: true,
+        isSuperUser: true
       },
     },
     {
