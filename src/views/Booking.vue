@@ -1,42 +1,11 @@
-<script>
-import { useBookingStore } from '../stores/BookingStore'
+<script setup>
 import ReservationForm from '../components/ReservationForm.vue'
-
-export default {
-  components: { ReservationForm },
-  data() {
-    return {
-      store: useBookingStore()
-    };
-  },
-  computed: {
-    prices() {
-      return this.store.prices;
-    }
-  },
-}
+import PricesList from '../components/PricesList.vue'
 </script>
 <template>
   <h1>Reservas</h1>
   <h3>Precios</h3>
-  <div class="row bord p-5 shadow m-5">
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Desde</th>
-          <th scope="col">Hasta</th>
-          <th scope="col">Precio semana</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="price of prices" key="key">
-          <td>{{ price.start }}</td>
-          <td>{{ price.end }}</td>
-          <td>{{ price.amount }}€</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <PricesList />
   <div>
     <h3>Formulario de reservas</h3>
     <div class="row bord p-5 shadow m-5">

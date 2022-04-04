@@ -27,7 +27,7 @@ onMounted(() => {
 })
 </script>
 <template>
-  <div class="weather" id="weather">
+  <div class="weather, text-center" id="weather">
     <div id="icon-weather"></div>
     <div class="description">
       <div>
@@ -47,10 +47,6 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
 }
-.weather div {
-  margin-left: 20px;
-}
-
 #icon-weather {
   padding-right: 25px;
   border-right: solid 2px black;

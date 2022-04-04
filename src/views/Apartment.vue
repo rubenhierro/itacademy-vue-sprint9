@@ -1,27 +1,28 @@
 <script setup>
-import { useApartmentStore } from '../stores/ApartmentStore';
-import { storeToRefs } from 'pinia';
 import Hero from '../components/Hero.vue'
 import Weather from '../components/Weather.vue'
+import Description from '../components/Description.vue'
+import ServicesList from '../components/ServicesList.vue'
+import Galery from '../components/Galery.vue'
+import Map from '../components/Map.vue'
 
-
-const store = useApartmentStore()
-const { enabledServices, disabledServices } = storeToRefs(store)
 </script>
 <template>
   <Hero />
-  <div>
+  <main>
     <h1>Apartamento</h1>
-    <h3>Servicios</h3>
-    <ul>
-      <li v-for="service of enabledServices" key="key">{{ service.name }}</li>
-    </ul>
-    <h4>Servicios no incluidos</h4>
-    <ul>
-      <li v-for="service of disabledServices" key="key">{{ service.name }}</li>
-    </ul>
-  </div>
+    <hr />
+    <h2>Apartamento turístico en la Ràpita</h2>
+    <Description />
+    <h3>Galería</h3>
+    <Galery />
+    <hr />
+    <ServicesList />
+    <hr />
+    <h3>¿Dónde se encuentra?</h3>
+    <Map />
+    <hr />
+    <h3>¿Qué tiempo hace ahora?</h3>
+    <Weather />
+  </main>
 </template>
-
-<style>
-</style>

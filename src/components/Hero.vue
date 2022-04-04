@@ -1,6 +1,6 @@
 <template>
   <div class="hero">
-    <h2>Apartamento turístico en La Ràpita</h2>
+    <h2>Descubre el Delta del Ebro</h2>
   </div>
 </template>
 <style>
