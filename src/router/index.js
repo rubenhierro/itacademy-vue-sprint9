@@ -7,7 +7,6 @@ import prices from "../views/admin/prices.vue";
 import register from "../views/admin/Register.vue";
 import services from "../views/admin/Services.vue";
 import availability from "../views/admin/Availability.vue";
-import form from "../components/ReservationForm.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -36,28 +35,40 @@ const router = createRouter({
       path: "/admin/servicios",
       name: "services",
       component: services,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/admin/precios",
       name: "prices",
       component: prices,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/admin/disponibilidad",
       name: "availability",
       component: availability,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/admin/reservas",
       name: "bookings",
       component: bookings,
-    },
-    {
-      path: "/admin/form",
-      name: "form",
-      component: form,
+      meta: {
+        requiresAuth: true,
+      },
     },
   ],
 });
 
+router.beforeEach((to, from) => {
+  if (to.meta.requiresAuth && !JSON.parse(localStorage.getItem("isLogged"))) {
+    return { name: "login" };
+  }
+});
 export default router;

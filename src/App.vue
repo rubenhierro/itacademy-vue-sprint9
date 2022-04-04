@@ -1,20 +1,12 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-
+import Head from './components/Head.vue'
 </script>
 
 <template>
   <div class="container">
     <header>
-      <nav>
-        <RouterLink to="/">Apartamento</RouterLink>-
-        <RouterLink to="/reservas">Reservas</RouterLink>---- // ----
-        <RouterLink to="/admin/servicios">Servicios</RouterLink>-
-        <RouterLink to="/admin/precios">Precios</RouterLink>-
-        <RouterLink to="/admin/disponibilidad">Disponibilidad</RouterLink>-
-        <RouterLink to="/admin/reservas">Reservas</RouterLink>-
-        <RouterLink to="/admin/form">Form</RouterLink>-
-      </nav>
+      <Head />
     </header>
     <RouterView />
   </div>
