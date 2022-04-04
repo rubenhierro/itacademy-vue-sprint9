@@ -63,6 +63,22 @@ const router = createRouter({
         requiresAuth: true,
       },
     },
+    {
+      path: "/register",
+      name: "register",
+      component: register,
+      meta: {
+        requiresAuth: false,
+      },
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: login,
+      meta: {
+        requiresAuth: false,
+      },
+    },
   ],
 });
 
