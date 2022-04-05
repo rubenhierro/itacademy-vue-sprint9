@@ -32,4 +32,15 @@ const store = LoginStore()
   flex-direction: column;
   align-items: end;
 }
+@media only screen and (max-width: 800px) {
+  .menu-container {
+    align-items: center;
+  }
+  .logo {
+    text-align: center;
+  }
+  .head {
+    justify-content: center;
+  }
+}
 </style>

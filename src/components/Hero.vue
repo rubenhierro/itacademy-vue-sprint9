@@ -7,6 +7,8 @@
 .hero {
   min-height: 600px;
   background-image: url(../assets/hero.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
