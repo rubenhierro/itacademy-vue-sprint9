@@ -1,9 +1,8 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 import { useBookingStore } from '../../stores/BookingStore';
 import { storeToRefs } from 'pinia';
 import List from '../../components/List.vue'
-import DisabledDate from '../../classes/DisabledDate'
 
 const store = useBookingStore()
 const { bookings, getDisponibility, getAprovedBookings } = storeToRefs(store)
@@ -62,26 +61,28 @@ function alert(message, type) {
 }
 </script>
 <template>
-  <div>
-    <h1>Admin Reservas</h1>
-  </div>
-  <!-- Alert -->
-  <div id="liveAlertPlaceholder"></div>
-  <div>
-    <List
-      :name="'Reservas'"
-      :list="bookings"
-      :properties="[
-        { display: 'Desde', value: 'start', type: 'date' },
-        { display: 'Hasta', value: 'end', type: 'date' },
-        { display: 'Nombre', value: 'name' },
-        { display: 'Email', value: 'email' },
-        { display: 'Estado', value: 'isAproved' },
-      ]"
-      :buttons="{ edit: false, delete: true, confirm: true, refuse: true }"
-      @confirm="confirmBooking"
-      @refuse="refuseBooking"
-      @delete="deleteBooking"
-    />
+  <div class="container">
+    <div>
+      <h1>Admin Reservas</h1>
+    </div>
+    <!-- Alert -->
+    <div id="liveAlertPlaceholder"></div>
+    <div>
+      <List
+        :name="'Reservas'"
+        :list="bookings"
+        :properties="[
+          { display: 'Desde', value: 'start', type: 'date' },
+          { display: 'Hasta', value: 'end', type: 'date' },
+          { display: 'Nombre', value: 'name' },
+          { display: 'Email', value: 'email' },
+          { display: 'Estado', value: 'isAproved' },
+        ]"
+        :buttons="{ edit: false, delete: true, confirm: true, refuse: true }"
+        @confirm="confirmBooking"
+        @refuse="refuseBooking"
+        @delete="deleteBooking"
+      />
+    </div>
   </div>
 </template>
