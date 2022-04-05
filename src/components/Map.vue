@@ -15,6 +15,12 @@
       <br />
     </div>
   </div>
+  <div>
+    <a
+      class="mt-3 p-2 px-4 btn btn-primary shadow-lg"
+      href="https://g.page/racodelicies?share"
+    >Ver en Google Maps</a>
+  </div>
 </template>
 <style>
 .mapouter {

@@ -11,6 +11,11 @@ const { enabledServices, disabledServices } = storeToRefs(store)
   </ul>
   <h4>Servicios no incluidos</h4>
   <ul>
-    <li v-for="service of disabledServices" key="key">{{ service.name }}</li>
+    <li v-for="service of disabledServices" key="key" class="not-included">{{ service.name }}</li>
   </ul>
 </template>
+<style>
+.not-included {
+  text-decoration: line-through;
+}
+</style>

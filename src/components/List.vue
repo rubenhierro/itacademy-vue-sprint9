@@ -71,6 +71,9 @@ const emits = defineEmits(['edit', 'delete', 'confirm', 'refuse'])
       </ul>
     </div>
   </div>
+  <div v-else>
+    <p class="text-danger fs-3">No hay elementos que mostrar</p>
+  </div>
 </template>
 <style>
 .isNotVisible {

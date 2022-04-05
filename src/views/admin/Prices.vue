@@ -138,7 +138,6 @@ export default {
           </div>
         </div>
       </div>
-
       <div class="col">
         <List
           :name="'Precios'"
