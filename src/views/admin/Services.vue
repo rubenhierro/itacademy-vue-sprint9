@@ -6,7 +6,7 @@ import service from '@/classes/Service'
 import list from '../../components/List.vue'
 
 const store = useApartmentStore()
-const { enabledServices, disabledServices, services } = storeToRefs(store)
+const { services } = storeToRefs(store)
 const name = ref(null)
 const isActive = ref(true)
 const isEditing = ref(false)
@@ -37,17 +37,36 @@ function deleteService(id) {
 <template>
   <div class="container">
     <h1>Admin Servicios</h1>
-    <div class="admin-list">
-      <div>
-        <span v-if="isEditing" class="text-danger">Editar servicio</span>
-        <form @submit.prevent="addService">
-          <input type="text" id="serviceInput" v-model="name" placeholder="Servicio" />
-          <input type="checkbox" id="serviceLabel" v-model="isActive" />
-          <label for="serviceLabel">{{ isActive === true ? "Activo" : "Inactivo" }}</label>
-          <button type="submit">Add</button>
-        </form>
+    <div class="row">
+      <div class="col">
+        <div class="card" style="width: 20rem;">
+          <div class="card-body">
+            <div class="card-title">Nuevo servicio</div>
+            <span v-if="isEditing" class="text-danger">Editar servicio</span>
+            <form class="row g-3" @submit.prevent="addService">
+              <div class="col-md-6 pt-3">
+                <input type="text" id="serviceInput" v-model="name" placeholder="Servicio" />
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  v-model="isActive"
+                  id="flexCheckDefault"
+                />
+                <label
+                  class="form-check-label"
+                  for="flexCheckDefault"
+                >{{ isActive === true ? "Activo" : "Inactivo" }}</label>
+              </div>
+              <div class="col pt-2 text-right">
+                <button class="p-2 px-4 btn btn-primary shadow-lg">Crear servicio</button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
-      <div>
+      <div class="col">
         <list
           :name="'Servicios'"
           :list="services"
@@ -63,9 +82,3 @@ function deleteService(id) {
     </div>
   </div>
 </template>
-<style>
-.admin-list {
-  display: flex;
-  justify-content: space-between;
-}
-</style>
