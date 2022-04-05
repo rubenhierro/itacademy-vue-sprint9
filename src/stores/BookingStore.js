@@ -6,9 +6,10 @@ export const useBookingStore = defineStore({
     prices: JSON.parse(localStorage.getItem("prices")) || [],
     disabledDates: JSON.parse(localStorage.getItem("disabledDates")) || [],
     bookings: JSON.parse(localStorage.getItem("bookings")) || [],
-    // preBookings: JSON.parse(localStorage.getItem("preBookings")) || [],
   }),
   getters: {
+    getSortedPrices: (state) =>
+      state.prices.sort((a, b) => new Date(a.start) - new Date(b.start)),
     getDisponibility: (state) =>
       state.parseDisabledDates.filter((i) => i.end > new Date()),
     parseDisabledDates: (state) =>

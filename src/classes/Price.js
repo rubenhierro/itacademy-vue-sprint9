@@ -4,8 +4,6 @@ export default class Price {
   amount;
 
   constructor(start, end, amount) {
-    (this.start = start.toLocaleDateString()),
-      (this.end = end.toLocaleDateString()),
-      (this.amount = parseInt(amount));
+    (this.start = start), (this.end = end), (this.amount = parseInt(amount));
   }
 }

@@ -50,6 +50,7 @@ export default {
       this.start = null
       this.end = null
       this.amount = null
+      this.isEditing = false
     },
     editPrice(id) {
       this.isEditing = true

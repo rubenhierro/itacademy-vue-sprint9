@@ -1,11 +1,11 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useBookingStore } from '../stores/BookingStore'
+import { storeToRefs } from 'pinia';
 
 const store = useBookingStore()
-const prices = computed(() => {
-  return store.prices
-})
+const { getSortedPrices: prices } = storeToRefs(store)
+
 </script>
 <template>
   <div class="row bord p-5 shadow m-5">
@@ -19,8 +19,8 @@ const prices = computed(() => {
       </thead>
       <tbody>
         <tr v-for="price of prices" key="key">
-          <td>{{ price.start }}</td>
-          <td>{{ price.end }}</td>
+          <td>{{ new Date(Date.parse(price.start)).toLocaleDateString() }}</td>
+          <td>{{ new Date(Date.parse(price.end)).toLocaleDateString() }}</td>
           <td>{{ price.amount }}€</td>
         </tr>
       </tbody>
