@@ -3,7 +3,18 @@ import { defineStore } from "pinia";
 export const useBookingStore = defineStore({
   id: "booking",
   state: () => ({
-    prices: JSON.parse(localStorage.getItem("prices")) || [],
+    prices: JSON.parse(localStorage.getItem("prices")) || [
+      {
+        start: "2022-03-08T12:36:57.787Z",
+        end: "2022-03-08T12:36:57.787Z",
+        amount: 450,
+      },
+      {
+        start: "2022-04-14T12:47:41.258Z",
+        end: "2022-04-19T12:47:41.258Z",
+        amount: 500,
+      },
+    ],
     disabledDates: JSON.parse(localStorage.getItem("disabledDates")) || [],
     bookings: JSON.parse(localStorage.getItem("bookings")) || [],
   }),

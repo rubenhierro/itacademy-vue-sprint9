@@ -3,7 +3,16 @@ import { defineStore } from "pinia";
 export const LoginStore = defineStore({
   id: "login",
   state: () => ({
-    users: JSON.parse(localStorage.getItem("userList")) || [],
+    users: JSON.parse(localStorage.getItem("userList")) || [
+      {
+        firstname: "",
+        lastname: "",
+        email: "",
+        username: "admin",
+        password: "admin",
+        isSuperUser: true,
+      },
+    ],
     isLogged: JSON.parse(localStorage.getItem("isLogged")) || false,
     isSuperUser: JSON.parse(localStorage.getItem("isSuperUser")) || false,
   }),
