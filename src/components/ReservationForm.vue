@@ -40,10 +40,15 @@ export default {
   methods: {
     addBooking() {
       //---- subtract a day to get it disponible in calendar
-      const checkOut = this.range.end
-      checkOut.setDate(checkOut.getDate() - 1)
+      // if (this.range.end) {
+      //   const checkOut = this.range.end
+      //   checkOut.setDate(checkOut.getDate() - 1)
+      // }
 
       if (this.range.start && this.range.end) {
+        const checkOut = this.range.end
+        checkOut.setDate(checkOut.getDate() - 1)
+
         const booking = new Booking(
           this.range.start,
           checkOut,
@@ -64,7 +69,7 @@ export default {
         range.end = null
         this.alert('¡Mensaje enviado!', 'success')
       } else {
-        this.alert('¡Cuidado, revisa el formulario y rellena todos los datos!', 'danger')
+        this.alert('¡Cuidado, selecciona las fechas y rellena el formulario!', 'danger')
       }
     },
     alert(message, type) {

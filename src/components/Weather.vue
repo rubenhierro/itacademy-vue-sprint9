@@ -23,25 +23,28 @@ function printWeather({ weather }) {
   iconWeather.innerHTML = `<img src="${imgURL}">`;
 }
 onMounted(() => {
-  // loadWeather()
+  loadWeather()
 })
 </script>
 <template>
-  <div class="weather, text-center" id="weather">
-    <div id="icon-weather"></div>
-    <div class="description">
-      <div>
-        <strong>La Ràpita</strong>
+
+    <div class="weather">
+      <div id="icon-weather"></div>
+      <div class="description">
+        <div>
+          <strong>La Ràpita</strong>
+        </div>
+        <div id="text-weather"></div>
       </div>
-      <div id="text-weather"></div>
     </div>
-  </div>
+
 </template>
 <style>
 .weather {
-  margin: 10px;
   display: flex;
+  justify-content: center;
   align-items: center;
+  margin: 10px;
 }
 .description {
   display: flex;
@@ -49,7 +52,6 @@ onMounted(() => {
 }
 #icon-weather {
   padding-right: 25px;
-  border-right: solid 2px black;
 }
 #text-weather {
   padding-right: 25px;

@@ -76,7 +76,6 @@ function alert(message, type) {
           { display: 'Hasta', value: 'end', type: 'date' },
           { display: 'Nombre', value: 'name' },
           { display: 'Email', value: 'email' },
-          { display: 'Estado', value: 'isAproved' },
         ]"
         :buttons="{ edit: false, delete: true, confirm: true, refuse: true }"
         @confirm="confirmBooking"

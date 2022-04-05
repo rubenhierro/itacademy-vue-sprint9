@@ -144,8 +144,8 @@ export default {
           :name="'Precios'"
           :list="prices"
           :properties="[
-            { display: 'Desde', value: 'start' },
-            { display: 'Hasta', value: 'end' },
+            { display: 'Desde', value: 'start', type: 'date' },
+            { display: 'Hasta', value: 'end', type: 'date' },
             { display: 'Precio', value: 'amount' }
           ]"
           :buttons="{ edit: true, delete: true }"
